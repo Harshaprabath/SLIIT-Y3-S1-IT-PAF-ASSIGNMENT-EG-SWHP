@@ -2,9 +2,16 @@ package com.paf_project.ElectroGrid.Servlet;
 
 import jakarta.servlet.http.HttpServlet;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.paf_project.ElectroGrid.Business.PowerconsumptioneService;
+import com.paf_project.ElectroGrid.Model.PowerConsumption;
+import com.paf_project.ElectroGrid.Model.UnitValue;
 
 /**
  * Servlet implementation class PowerconsumptionServlet
@@ -24,8 +31,22 @@ public class PowerconsumptionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+				
+		 
+		
+		    	
+				PowerconsumptioneService powerconsumptioneService=new PowerconsumptioneService();
+				List<UnitValue> unitValues= powerconsumptioneService.getAllUnitValue();
+				System.out.print(unitValues);
+				
+		    	//if(unitValues != null) {
+		    		
+		    		request.setAttribute("unitValues", unitValues);
+		        	request.getRequestDispatcher("powerconsumption.jsp").forward(request, response);
+		        	
+		        	
+		    	//}
+		
 	}
 
 	/**

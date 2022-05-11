@@ -89,6 +89,7 @@
             <artifactId>jersey-media-json-binding</artifactId>
         </dependency>
         -->
+     
         
     </dependencies>
     <properties>
