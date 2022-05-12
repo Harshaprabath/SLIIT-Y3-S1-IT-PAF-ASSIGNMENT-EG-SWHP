@@ -27,9 +27,7 @@ public class PowerconsumptionServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
 		 
@@ -39,13 +37,19 @@ public class PowerconsumptionServlet extends HttpServlet {
 				List<UnitValue> unitValues= powerconsumptioneService.getAllUnitValue();
 				System.out.print(unitValues);
 				
-		    	//if(unitValues != null) {
+				int x = 5;
+		    /*	if(unitValues != null) {
 		    		
 		    		request.setAttribute("unitValues", unitValues);
 		        	request.getRequestDispatcher("powerconsumption.jsp").forward(request, response);
 		        	
 		        	
-		    	//}
+		    	}else {
+		    		response.sendRedirect("index.jsp");
+		    	} */
+				
+				request.setAttribute("x", x);
+	        	request.getRequestDispatcher("powerconsumption.jsp").forward(request, response);
 		
 	}
 

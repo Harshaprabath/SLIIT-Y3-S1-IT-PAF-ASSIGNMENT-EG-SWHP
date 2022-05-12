@@ -57,8 +57,7 @@ public class PowerconsumptioneService {
 		} catch (Exception e) {
 			
 				System.out.println(e);
-		}
-			
+		}	
 		return powerConsumptions;
 	}
 	
