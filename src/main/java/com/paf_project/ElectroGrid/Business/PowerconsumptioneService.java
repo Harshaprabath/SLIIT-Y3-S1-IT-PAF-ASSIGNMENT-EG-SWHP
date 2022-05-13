@@ -159,6 +159,42 @@ public class PowerconsumptioneService {
 		
 	}
 	
+	// retrieve unite values and limits  
+		public List<UnitValue> getUnitValuebyId(){
+				
+			List<UnitValue> unitValues = new ArrayList<UnitValue>();
+			
+			String sql = "SELECT * FROM unit_value";
+			
+			try {
+				
+				statement = connection.createStatement();
+				resultSet = statement.executeQuery(sql);
+				
+				while (resultSet.next()) {
+					
+					UnitValue unitValue = new UnitValue();
+					
+					unitValue.setId(resultSet.getString(1));
+					unitValue.setUpper_limit(resultSet.getInt(2));
+					unitValue.setLower_limit(resultSet.getInt(3));
+					unitValue.setCurrent_price_per_unit(resultSet.getDouble(4));
+						
+										
+					unitValues.add(unitValue);
+					
+				}
+					
+			} catch (Exception e) {
+				
+				System.out.println(e);
+				
+			}
+				
+			return unitValues;
+			
+		}
+	
 	
 	//edit unite values and limits  
 	public String updateUnitValue(UnitValue uv){

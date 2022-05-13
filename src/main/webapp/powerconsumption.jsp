@@ -9,6 +9,8 @@
 	PowerconsumptioneService powerconsumptioneService=new PowerconsumptioneService();
 	List<UnitValue> unitValues= powerconsumptioneService.getAllUnitValue();
 	List<PowerConsumption> powerConsumptions = powerconsumptioneService.getAll();
+	
+	UnitValue unitValuerow = new UnitValue();
 %>
 
 <!DOCTYPE html>
@@ -76,6 +78,7 @@
 				
 				<%for (int recodeCount = 0; recodeCount < unitValues.size();recodeCount++){ %>
 					<% UnitValue unitValue = unitValues.get(recodeCount); %>
+					<% unitValuerow = unitValue; %>
 					<tr>
 						<td></td>						
 						<td><%=unitValue.getLower_limit() %></td>
@@ -83,7 +86,7 @@
 						<td><%=unitValue.getCurrent_price_per_unit() %></td>
 						<td>
 							<a href="#editUnitDetailsModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-	
+							
 						</td>
 					</tr>
 				<%} %>
@@ -100,28 +103,31 @@
 <div id="editUnitDetailsModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form id="formItem" name="formItem">
+			<form id="PCEditform" name="PCEditform">
 				<div class="modal-header">						
 					<h4 class="modal-title">Edit Unit Details</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
+				<input id="uId" name="uId" value=<%=unitValuerow.getId() %>  type ="hidden">
 				<div class="modal-body">					
 					<div class="form-group">
 						<label>Lower Limit</label>
-						<input type="number" class="form-control" required>
+						<input id="lowerLimit" name="lowerLimit" type="number" class="form-control"  value=<%=unitValuerow.getLower_limit() %> required>
 					</div>
 					<div class="form-group">
 						<label>Upper Limit</label>
-						<input type="number" class="form-control" required>
+						<input id="upperLimit" name="upperLimit" type="number" class="form-control"  value=<%=unitValuerow.getUpper_limit()%> required>
 					</div>
 					<div class="form-group">
 						<label>current Price Per Unit</label>
-						<input type="number" class="form-control" required>
+						<input id="cPrice" name="cPrice" type="number" class="form-control" value=<%=unitValuerow.getCurrent_price_per_unit() %> required>
 					</div>					
 				</div>
+				<div id="alertSuccess" class="alert alert-success"></div>
+			 	<div id="alertError" class="alert alert-danger"></div>
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-					<input type="submit" class="btn btn-info" value="Save">
+					<input id="btnEdit" name="btnEdit" type="submit" class="btn btn-info" value="Save">
 				</div>
 			</form>
 		</div>
@@ -179,7 +185,7 @@
 <div id="addPowerConsumptionModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form >
+			<form id="PCAddform" name="PCAddform" >
 				<div class="modal-header">						
 					<h4 class="modal-title">Add PowerConsumption</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -187,18 +193,21 @@
 				<div class="modal-body">					
 					<div class="form-group">
 						<label>Customer ID</label>
-						<input type="number" class="form-control" required>
+						<input type="number" class="form-control" id="custormerID" name ="custormerID" required>
 					</div>
 					<div class="form-group">
 						<label>Units</label>
-						<input type="number" class="form-control" required>
+						<input type="number" class="form-control" id="units" name ="units" required>
 					</div>					
 				</div>
+				 <div id="addalertSuccess" class="alert alert-success"></div>
+			 	 <div id="addalertError" class="alert alert-danger"></div>
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-					<input type="submit" class="btn btn-success" value="Calculate & Add">
+					<input id="btnSave" name="btnSave" type="submit" class="btn btn-success" value="Calculate & Add">
 				</div>
 			</form>
+			
 		</div>
 	</div>
 </div>
