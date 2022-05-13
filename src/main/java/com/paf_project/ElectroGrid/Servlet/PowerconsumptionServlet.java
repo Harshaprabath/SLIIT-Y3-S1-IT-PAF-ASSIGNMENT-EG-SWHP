@@ -30,35 +30,53 @@ public class PowerconsumptionServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
-		 
-		
-		    	
-				PowerconsumptioneService powerconsumptioneService=new PowerconsumptioneService();
-				List<UnitValue> unitValues= powerconsumptioneService.getAllUnitValue();
-				System.out.print(unitValues);
+		 	    	
 				
-				int x = 5;
-		    /*	if(unitValues != null) {
-		    		
-		    		request.setAttribute("unitValues", unitValues);
-		        	request.getRequestDispatcher("powerconsumption.jsp").forward(request, response);
-		        	
-		        	
-		    	}else {
-		    		response.sendRedirect("index.jsp");
-		    	} */
 				
-				request.setAttribute("x", x);
-	        	request.getRequestDispatcher("powerconsumption.jsp").forward(request, response);
-		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		PowerconsumptioneService powerconsumptioneService=new PowerconsumptioneService();
+		PowerConsumption powerconsumption = new PowerConsumption();
+		
+		int cid = Integer.parseInt(request.getParameter("custormerID"));
+		int units = Integer.parseInt(request.getParameter("units"));
+		
+		powerconsumption.setCustomer_ID(cid);
+		powerconsumption.setUnits(units);
+		
+		String output = powerconsumptioneService.addPowerDetails(powerconsumption);
+		
+		response.getWriter().write(output);
 	}
+	
+
+	
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) 
+			 throws ServletException, IOException 
+			{ 
+					 PowerconsumptioneService powerconsumptioneService=new PowerconsumptioneService();
+					 UnitValue unitValue= new UnitValue();
+					 
+						String uId = request.getParameter("uId");
+						int lowerLimit = Integer.parseInt(request.getParameter("lowerLimit")); 
+						int upperLimit = Integer.parseInt(request.getParameter("upperLimit")); 
+						double cPrice = Double.parseDouble(request.getParameter("cPrice"));
+						
+						unitValue.setId(uId);
+						unitValue.setLower_limit(lowerLimit);
+						unitValue.setUpper_limit(upperLimit);
+						unitValue.setCurrent_price_per_unit(cPrice);
+						
+						String output = powerconsumptioneService.updateUnitValue(unitValue);
+						
+					    response.getWriter().write(output); 
+			} 
+	
+
 
 }
