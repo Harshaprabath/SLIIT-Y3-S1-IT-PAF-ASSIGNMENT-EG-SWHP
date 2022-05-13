@@ -11,6 +11,7 @@
 	List<PowerConsumption> powerConsumptions = powerconsumptioneService.getAll();
 	
 	UnitValue unitValuerow = new UnitValue();
+	
 %>
 
 <!DOCTYPE html>
