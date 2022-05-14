@@ -216,7 +216,7 @@
 <div id="deletePowerConsumptionModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form>
+			<form  id="deleteform" name="deleteform">
 				<div class="modal-header">						
 					<h4 class="modal-title">Delete PowerConsumption</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -225,9 +225,10 @@
 					<p>Are you sure you want to delete these Records?</p>
 					<p class="text-warning"><small>This action cannot be undone.</small></p>
 				</div>
+				<input id="uId" name="uId" value=<%=unitValuerow.getId() %>  type ="hidden">
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-					<input type="submit" class="btn btn-danger" value="Delete">
+					<input id="btndelete" name="btndelete" type="submit" class="btn btn-danger" value="Delete">
 				</div>
 			</form>
 		</div>

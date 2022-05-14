@@ -2,6 +2,7 @@ package com.paf_project.ElectroGrid.Servlet;
 
 import jakarta.servlet.http.HttpServlet;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +77,19 @@ public class PowerconsumptionServlet extends HttpServlet {
 						
 					    response.getWriter().write(output); 
 			} 
+	
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+			response.setContentType("text/html");
+			PrintWriter pw = response.getWriter();
+
+
+			PowerconsumptioneService powerconsumptioneService=new PowerconsumptioneService();
+		
+			String output = powerconsumptioneService.deletePowerDetails(Integer.parseInt(request.getParameter("uId")));
+			response.getWriter().write(output); 
+
+		}
 	
 
 

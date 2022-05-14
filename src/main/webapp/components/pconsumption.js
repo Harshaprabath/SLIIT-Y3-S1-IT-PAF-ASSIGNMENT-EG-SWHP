@@ -138,3 +138,35 @@ function onItemEditComplete(response, status) {
 	}
 	$("#hidItemIDSave").val("");
 }
+
+
+//delete================================================================
+$(document).ready(function() {
+		$.ajax({
+				url: "PowerconsumptionServlet",
+				type: "DELETE",
+				data : $("#deleteform").serialize(),
+				dataType : "text",
+				cache: false,
+				omplete : function(response, status) {
+					onItemEditComplete(response.responseText, status);
+				}
+			});
+		$(document).on("click", ".btndelete", function() {
+				var $ele = $(this).parent().parent();
+							$.ajax({
+								url: "PowerconsumptionServlet",
+								type: "DELETE",
+								cache: false,
+								data:{
+								id: $(this).attr("id")
+								},
+								success: function(dataResult){
+								var dataResult = JSON.parse(dataResult);
+									if(dataResult.statusCode==name){
+									$ele.fadeOut().remove();
+									}
+								}
+							});
+		});
+});
